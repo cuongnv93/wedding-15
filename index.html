@@ -10981,7 +10981,7 @@
                         </svg></div>
                 </div>
                 <div id="formGG">
-                    <div id="FORM4" data-config-id="66d360f3b4577100128b7bb4 1" class='ladi-element'>
+                    <div id="FORM4" data-config-id="66d360f3b4577100128b7bb4" class='ladi-element'>
                         <form autocomplete="off" method="post" class='ladi-form'>
                             <div id="BUTTON24" class='ladi-element'>
                                 <div class='ladi-button'>
@@ -13035,7 +13035,7 @@
     document.querySelector('#formGG form').addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const form = e.target;
+        const form = e.target; // Lấy form để reset sau này
 
         const data = {
             name: form.name.value,
@@ -13044,12 +13044,14 @@
             FORM_ITEM: form.FORM_ITEM.value
         };
 
-        fetch('https://script.google.com/macros/s/AKfycbwqI2rDyiHiFPCzS2xYz99a-QnrPA_im_fnuMvCmUhwrP0IpG9eyaqVOgpeG94Db3f8Sw/exec', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
+        fetch("https://script.google.com/macros/s/AKfycbwqI2rDyiHiFPCzS2xYz99a-QnrPA_im_fnuMvCmUhwrP0IpG9eyaqVOgpeG94Db3f8Sw/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: JSON.stringify(data)
         })
-            .then(res => res.json())
+            .then(res => res.json()) // Nếu Apps Script trả về JSON
             .then(res => {
                 if (res.status === 'success') {
                     alert('Đã gửi lời chúc thành công!');
