@@ -10980,7 +10980,7 @@
                             </path>
                         </svg></div>
                 </div>
-                <div id="FORM4" data-config-id="66d360f3b4577100128b7bb4" class='ladi-element'>
+                <div id="FORM41" data-config-id="66d360f3b4577100128b7bb4" class='ladi-element'>
                     <form autocomplete="off" method="post" class='ladi-form'>
                         <div id="BUTTON24" class='ladi-element'>
                             <div class='ladi-button'>
@@ -13021,5 +13021,38 @@
                 </style>
             </div>
 </body>
+
+<script>
+    document.querySelector('#FORM41 form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const data = {
+            name: form.name.value,
+            message: form.message.value,
+            form_item5: form.form_item5.value,
+            FORM_ITEM: form.FORM_ITEM.value
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbwqI2rDyiHiFPCzS2xYz99a-QnrPA_im_fnuMvCmUhwrP0IpG9eyaqVOgpeG94Db3f8Sw/exec', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === 'success') {
+                    alert('Đã gửi lời chúc thành công!');
+                    form.reset();
+                } else {
+                    alert('Lỗi khi gửi: ' + res.message);
+                }
+            })
+            .catch(error => {
+                alert('Gặp lỗi kết nối: ' + error.message);
+            });
+    });
+</script>
 
 </html><!--Publish time: Sun, 22 Sep 2024 09:32:48 GMT--><!--LadiPage build time: Sat, 21 Sep 2024 08:35:33 GMT-->
