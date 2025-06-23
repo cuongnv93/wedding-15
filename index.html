@@ -22,7 +22,7 @@
     <meta property="og:description"
         content="Sử dụng Full tất cả các tính năng, tùy chỉnh không giới hạn và sử dụng trọn đời." />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" type="image/x-icon"
+    <!-- <link rel="icon" type="image/x-icon"
         href="https://static.ladipage.net/5c728619c417ab07e5194baa/me-trong-20240418044217-wlyez.png" />
     <link rel="shortcut icon"
         href="https://static.ladipage.net/5c728619c417ab07e5194baa/me-trong-20240418044217-wlyez.png" />
@@ -31,7 +31,7 @@
     <link rel="apple-touch-icon-precomposed"
         href="https://static.ladipage.net/5c728619c417ab07e5194baa/me-trong-20240418044217-wlyez.png" />
     <meta name="msapplication-TileImage"
-        content="https://static.ladipage.net/5c728619c417ab07e5194baa/me-trong-20240418044217-wlyez.png" />
+        content="https://static.ladipage.net/5c728619c417ab07e5194baa/me-trong-20240418044217-wlyez.png" /> -->
     <meta name="revisit-after" content="days" />
     <link rel="dns-prefetch">
     <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
@@ -13033,9 +13033,11 @@
 </body>
 
 <script>
-
+    const GOOGLE_SCRIPT_URL_LOI_CHUC = 'https://script.google.com/macros/s/AKfycbwqI2rDyiHiFPCzS2xYz99a-QnrPA_im_fnuMvCmUhwrP0IpG9eyaqVOgpeG94Db3f8Sw/exec';
+    const GOOGLE_SCRIPT_URL_THAM_DU = 'https://script.google.com/macros/s/AKfycbw5tI5_JcFgTjrVP0oYMigUoGX_XarXfyYNlCsvipuNJcysvxQYTLFcaT-kUYgs4jjp/exec';
     const backdrop = document.getElementById('backdrop-popup');
     const closeButton = document.querySelector('.popup-close');
+
 
     document.querySelector('#formGG form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -13044,12 +13046,11 @@
         const data = {
             name: "'" + (form.name.value || ''),
             message: "'" + (form.message.value || ''),
-            form_item5: form.form_item5.value || '',
             FORM_ITEM: form.FORM_ITEM.value || '',
             formType: 'LoiChuc',
         };
 
-        fetch("https://script.google.com/macros/s/AKfycbz-L6tTNH9T-snKIbQVSGa7vKxXLay_I5KVQcXhC6v6aFodcGKMxXItpOjwBWVd_Nf2Sw/exec", {
+        fetch(GOOGLE_SCRIPT_URL_LOI_CHUC, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -13102,16 +13103,15 @@
         const form = e.target; // Lấy form để reset sau này
 
         const data = {
-            name: (form.name.value || ''),
-            message: (form.message.value || ''),
-            formType: 'DanhSach',
-            phone: form.phone.value || '',
-            form_item: form.form_item.value || '',
-            form_item14: form.form_item14.value || '',
-            form_item15: form.form_item15.value || '',
+            name: "'" + form.name.value,
+            phone: "'" + form.phone.value,
+            form_item: "'" + form.form_item.value,
+            form_item14: "'" + form.form_item14.value,
+            form_item15: "'" + form.form_item15.value,
+            message: "'" + form.message.value,
         };
 
-        fetch("https://script.google.com/macros/s/AKfycbz-L6tTNH9T-snKIbQVSGa7vKxXLay_I5KVQcXhC6v6aFodcGKMxXItpOjwBWVd_Nf2Sw/exec", {
+        fetch(GOOGLE_SCRIPT_URL_THAM_DU, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Notification Lời Chúc</title>
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .info {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .info p {
+            margin-bottom: 15px;
+        }
+
+        .status {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .status h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .status p {
+            color: #555;
+            margin: 0;
+        }
+
+        /* Custom Toastify Styles */
+        .toast-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .toast-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .toast-text {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .toast-message {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .info {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="container">
+        <h1>🎉 Auto Notification Lời Chúc</h1>
+
+        <div class="info">
+            <p>Hệ thống sẽ tự động hiển thị lời chúc mỗi 3 giây.</p>
+            <p>Mỗi lời chúc sẽ hiển thị trong 5 giây.</p>
+        </div>
+
+        <div class="status">
+            <h3>✅ Trạng thái: Đang chạy</h3>
+            <p>Notification sẽ bắt đầu hiển thị sau 2 giây...</p>
+        </div>
+    </div> -->
+
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script>
+        // Cấu hình
+        const config = {
+            displayDuration: 5000, // 5 giây
+            intervalTime: 5000     // 3 giây
+        };
+
+        // Danh sách lời chúc
+        const messages = [
+            {
+                name: "Nguyễn Văn A",
+                message: "Chúc mừng sinh nhật! Chúc bạn luôn khỏe mạnh và hạnh phúc!",
+                icon: "🎂",
+                background: "linear-gradient(135deg, #ff9a9e, #fecfef)"
+            },
+            {
+                name: "Trần Thị B",
+                message: "Chúc mừng kỷ niệm ngày cưới! Chúc hai bạn mãi mãi hạnh phúc!",
+                icon: "💕",
+                background: "linear-gradient(135deg, #ffecd2, #fcb69f)"
+            },
+            {
+                name: "Lê Văn C",
+                message: "Chúc mừng thành công trong công việc! Chúc bạn ngày càng thăng tiến!",
+                icon: "🚀",
+                background: "linear-gradient(135deg, #a8edea, #fed6e3)"
+            },
+            {
+                name: "Phạm Thị D",
+                message: "Chúc bạn luôn khỏe mạnh và tràn đầy năng lượng!",
+                icon: "💪",
+                background: "linear-gradient(135deg, #a8e6cf, #dcedc1)"
+            },
+            {
+                name: "Hoàng Văn E",
+                message: "Chúc mừng năm mới! Chúc bạn và gia đình an khang thịnh vượng!",
+                icon: "🎊",
+                background: "linear-gradient(135deg, #ffecd2, #fcb69f)"
+            },
+            {
+                name: "Vũ Thị F",
+                message: "Chúc bạn có một ngày tuyệt vời và nhiều niềm vui!",
+                icon: "☀️",
+                background: "linear-gradient(135deg, #a8edea, #fed6e3)"
+            },
+            {
+                name: "Đặng Văn G",
+                message: "Chúc mừng tốt nghiệp! Chúc bạn thành công trên con đường sự nghiệp!",
+                icon: "🎓",
+                background: "linear-gradient(135deg, #a8edea, #fed6e3)"
+            },
+            {
+                name: "Bùi Thị H",
+                message: "Chúc bạn luôn giữ được nụ cười và tinh thần lạc quan!",
+                icon: "😊",
+                background: "linear-gradient(135deg, #a8e6cf, #dcedc1)"
+            },
+            {
+                name: "Ngô Văn I",
+                message: "Chúc mừng thăng chức! Chúc bạn ngày càng thành đạt!",
+                icon: "🏆",
+                background: "linear-gradient(135deg, #ffecd2, #fcb69f)"
+            },
+            {
+                name: "Lý Thị K",
+                message: "Chúc bạn và gia đình luôn hạnh phúc, an khang thịnh vượng!",
+                icon: "🏠",
+                background: "linear-gradient(135deg, #ff9a9e, #fecfef)"
+            }
+        ];
+
+        let autoInterval;
+
+        // Tạo toast notification
+        function createToast(messageData) {
+            const toastContent = `
+                <div class="toast-content">
+                    <div class="toast-icon">${messageData.icon}</div>
+                    <div class="toast-text">
+                        <div class="toast-title">${messageData.name}</div>
+                        <div class="toast-message">${messageData.message}</div>
+                    </div>
+                </div>
+            `;
+
+            Toastify({
+                text: toastContent,
+                duration: config.displayDuration,
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                style: {
+                    background: messageData.background,
+                    color: "#333",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    minWidth: "350px",
+                    maxWidth: "500px",
+                    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+                    fontSize: "14px"
+                },
+                escapeMarkup: false
+            }).showToast();
+        }
+
+        // Hiển thị toast ngẫu nhiên
+        function showRandomToast() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const messageData = messages[randomIndex];
+            createToast(messageData);
+        }
+
+        // Bắt đầu auto show
+        function startAutoShow() {
+            // Hiển thị ngay lập tức
+            showRandomToast();
+
+            // Thiết lập interval
+            autoInterval = setInterval(() => {
+                showRandomToast();
+            }, config.intervalTime);
+
+            console.log('🚀 Auto notification đã bắt đầu');
+        }
+
+        // Khởi tạo khi load trang
+        window.addEventListener('load', function () {
+            console.log('🎉 Trang đã load xong');
+
+            // Bắt đầu auto show sau 2 giây
+            setTimeout(() => {
+                startAutoShow();
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>
