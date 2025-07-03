@@ -13034,7 +13034,6 @@
 
 <script>
     const GOOGLE_SCRIPT_URL_LOI_CHUC = 'https://script.google.com/macros/s/AKfycbwqI2rDyiHiFPCzS2xYz99a-QnrPA_im_fnuMvCmUhwrP0IpG9eyaqVOgpeG94Db3f8Sw/exec';
-    const GOOGLE_SCRIPT_URL_THAM_DU = 'https://script.google.com/macros/s/AKfycbw5tI5_JcFgTjrVP0oYMigUoGX_XarXfyYNlCsvipuNJcysvxQYTLFcaT-kUYgs4jjp/exec';
     const backdrop = document.getElementById('backdrop-popup');
     const closeButton = document.querySelector('.popup-close');
 
@@ -13058,26 +13057,6 @@
             body: JSON.stringify(data)
         })
             .then(res => res.json()) // Nếu Apps Script trả về JSON
-            .then(res => {
-                // document.getElementById("myForm").reset();
-                // document.getElementById('POPUP15').style.display = 'block';
-                // document.getElementById('backdrop-popup').style.display = 'block';
-                // document.getElementById('backdrop-popup').style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-
-                // const popup = document.getElementById('POPUP15');
-                // // Tạo một div mới
-                // if (popup && !popup.querySelector('.popup-close')) {
-                //     const closeDiv = document.createElement('div');
-                //     closeDiv.className = 'popup-close';
-                //     // Thêm nội dung hoặc thuộc tính cho closeDiv nếu cần
-                //     popup.appendChild(closeDiv);
-                // }
-
-                // setTimeout(() => {
-                //     document.getElementById('backdrop-popup').style.display = 'none';
-                //     document.querySelector('.popup-close').style.display = 'none';
-                // }, 3000);
-            })
     });
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -13109,9 +13088,10 @@
             form_item14: "'" + form.form_item14.value,
             form_item15: "'" + form.form_item15.value,
             message: "'" + form.message.value,
+            formType: 'DanhSach',
         };
 
-        fetch(GOOGLE_SCRIPT_URL_THAM_DU, {
+        fetch(GOOGLE_SCRIPT_URL_LOI_CHUC, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -13119,7 +13099,7 @@
             body: JSON.stringify(data)
         })
             .then(res => res.json()) // Nếu Apps Script trả về JSON
-            .then(res => { })
+            .then(res => console.log(res))
     });
 </script>
 
